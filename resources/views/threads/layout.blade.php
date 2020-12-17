@@ -197,13 +197,11 @@
                 <h1 class="tt-title-border">
                     Create New Topic
                 </h1>
-                <form class="form-default form-create-topic" action="/threads" method="post"
-                    enctype="multipart/form-data">
-                    @csrf
+                <form class="form-default form-create-topic">
                     <div class="form-group">
                         <label for="inputTopicTitle">Topic Title</label>
                         <div class="tt-value-wrapper">
-                            <input type="text" name="title" class="form-control" id="inputTopicTitle"
+                            <input type="text" name="name" class="form-control" id="inputTopicTitle"
                                 placeholder="Subject of your topic">
                             <span class="tt-value-input">99</span>
                         </div>
@@ -315,9 +313,7 @@
                                     <li class="hr"></li>
                                     <li><button type="button" class="btn-icon">
                                             <svg class="tt-icon">
-                                                <use xlink:href="#icon-upload_files">
-                                                </use>
-
+                                                <use xlink:href="#icon-upload_files"></use>
                                             </svg>
                                         </button></li>
                                     <li><button type="button" class="btn-icon">
@@ -354,25 +350,17 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <textarea name="content" class="form-control" rows="5"
+                            <textarea name="message" class="form-control" rows="5"
                                 placeholder="Lets get started"></textarea>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                            <div class="form-group">
-                                    <label for="exampleFormControlFile1">Example file input</label>
-                                    <input type="file" name="image" class="form-control-file" id="exampleFormControlFile1">
-                                </div>
-                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputTopicTitle">Category</label>
-                                    <select class="form-control" name="category_id">
+                                    <select class="form-control">
                                         <option value="Select">Select</option>
-                                        <option value=1>Value 01</option>
-                                        <option value=2>Value 02</option>
+                                        <option value="Value 01">Value 01</option>
+                                        <option value="Value 02">Value 02</option>
                                     </select>
                                 </div>
                             </div>
@@ -386,7 +374,7 @@
                         </div>
                         <div class="row">
                             <div class="col-auto ml-md-auto">
-                                <input type="submit" class="btn btn-secondary btn-width-lg">
+                                <a href="#" class="btn btn-secondary btn-width-lg">Create Post</a>
                             </div>
                         </div>
                     </div>
