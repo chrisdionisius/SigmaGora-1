@@ -197,14 +197,15 @@
                 <h1 class="tt-title-border">
                     Create New Topic
                 </h1>
-                <form class="form-default form-create-topic" action="/threads" method="post"
+                <form class="form-default form-create-topic" action="/threads/{{$thread->id}}" method="post"
                     enctype="multipart/form-data">
+                    @method('PATCH')
                     @csrf
                     <div class="form-group">
                         <label for="inputTopicTitle">Topic Title</label>
                         <div class="tt-value-wrapper">
                             <input type="text" name="title" class="form-control" id="inputTopicTitle"
-                                placeholder="Subject of your topic">
+                                placeholder="{{$thread->title}}" value="{{$thread->title}}">
                             <span class="tt-value-input">99</span>
                         </div>
                         <div class="tt-note">Describe your topic well, while keeping the subject as short as possible.
@@ -355,7 +356,7 @@
                         </div>
                         <div class="form-group">
                             <textarea name="content" class="form-control" rows="5"
-                                placeholder="Lets get started"></textarea>
+                                placeholder="{{$thread->content}}">{{$thread->content}}</textarea>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
@@ -372,7 +373,7 @@
                                     <select class="form-control" name="category_id">
                                         <option value="Select">Select</option>
                                         @foreach($categories as $category)
-                                        <option value="{{$category->id}}">{{$category->category_name}}</option>
+                                        <option value="{{$category->id}}" {{ $thread->category_id == $category->id ? 'selected' : ''}}>{{$category->category_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>

@@ -1,10 +1,10 @@
 @foreach($threads as $thread)
 <hr>
 <p>Diposting {{$thread-> elapsed}} hari yang lalu</p>
-<h3>{{$thread->title}}</h3>
+<a href="/threads/{{$thread-> id}}"><h3>{{$thread->title}}</h3></a>
 <h4>{{$users->find($thread->user_id)->name}}</h4>
 <p>Category : {{$categories->find($thread->category_id)->category_name}}</p>
-<p>{{substr($thread-> content,0,300) }} </p>
+<p>{{$thread-> content }} </p>
 <img src="{{$thread->media}}" alt="{{$thread->title}}">
 @endforeach
 <ul class="pagination justify-content-center mb-4">

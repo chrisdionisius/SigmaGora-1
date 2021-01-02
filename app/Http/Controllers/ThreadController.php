@@ -9,10 +9,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ThreadController extends Controller
-{
+{    
     public function __construct()
     {
-    $this->middleware('auth', ['except' => ['index']]);
+        $this->middleware('auth', ['except' => ['index']]);
     }
     public function index()
     {
@@ -29,7 +29,8 @@ class ThreadController extends Controller
      */
     public function create()
     {
-        return view('threads.form');
+        $categories = Category::all();
+        return view('threads.form',compact('categories'));
     }
 
     /**
@@ -61,7 +62,10 @@ class ThreadController extends Controller
      */
     public function show(Thread $thread)
     {
-        //
+        Thread::findOrFail($thread->id);
+        $users=User::all();
+        $categories = Category::all();
+        return view('threads.show',compact('thread','users','categories'));
     }
 
     /**
@@ -72,7 +76,8 @@ class ThreadController extends Controller
      */
     public function edit(Thread $thread)
     {
-        //
+        $categories = Category::all();
+        return view('threads.edit',compact('thread','categories'));
     }
 
     /**
@@ -84,7 +89,15 @@ class ThreadController extends Controller
      */
     public function update(Request $request, Thread $thread)
     {
-        //
+        if ($request->image) {
+            $file=$request->file('image');
+            $nama=time().'.'.$file->getClientOriginalExtension();
+            $file->storeAs('public/thread',$nama); 
+            $path='/storage/thread/'.$nama;
+            $data=$request->merge(['media'=>$path]);
+        }
+        $thread->update($request->all());
+        return redirect('/threads');
     }
 
     /**
@@ -95,6 +108,7 @@ class ThreadController extends Controller
      */
     public function destroy(Thread $thread)
     {
-        //
+        $thread->delete();
+        return redirect('/threads');
     }
 }
