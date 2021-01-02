@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
@@ -13,5 +14,8 @@ class Thread extends Model
         return $this->hasOne('App\Models\Category');
     }
 
+    public function getElapsedAttribute(){
+        return Carbon::now()->diffInDays($this->updated_at);
+    }
 
 }

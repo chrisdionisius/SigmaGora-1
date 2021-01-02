@@ -3,19 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Thread;
+use App\Models\Category;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ThreadController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+    $this->middleware('auth', ['except' => ['index']]);
+    }
     public function index()
     {
-        //
+        $threads = Thread::paginate(5);
+        $users = User::all();
+        $categories = Category::all();
+        return view('threads.index',compact('threads','users','categories'));
     }
 
     /**
