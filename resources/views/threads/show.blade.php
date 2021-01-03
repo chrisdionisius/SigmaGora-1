@@ -722,6 +722,7 @@
         <div class="tt-wrapper-inner">
             <div class="pt-editor form-default">
                 <h6 class="pt-title">Post Your Reply</h6>
+                
                 <div class="pt-row">
                     <div class="col-left">
                         <ul class="pt-edit-btn">
@@ -797,10 +798,13 @@
                         <a href="#" class="btn btn-primary">Preview</a>
                     </div>
                 </div>
+                <form action="{{route('addComment',$thread->id)}}" method="post">
+                @csrf
                 <div class="form-group">
-                    <textarea name="message" class="form-control" rows="5" placeholder="Lets get started"></textarea>
+                    <textarea name="content" class="form-control" rows="5" placeholder="Lets get started"></textarea>
                 </div>
                 <div class="pt-row">
+
                     <div class="col-auto">
                         <div class="checkbox-group">
                             <input type="checkbox" id="checkBox21" name="checkbox" checked="">
@@ -811,10 +815,13 @@
                             </label>
                         </div>
                     </div>
+
                     <div class="col-auto">
-                        <a href="#" class="btn btn-secondary btn-width-lg">Reply</a>
+                    <button type="submit" class="btn btn-secondary btn-width-lg">Reply</button>
                     </div>
+
                 </div>
+                </form>
             </div>
         </div>
         <div class="tt-topic-list tt-ofset-30">
