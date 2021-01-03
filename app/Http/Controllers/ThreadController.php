@@ -20,7 +20,8 @@ class ThreadController extends Controller
         $threads = Thread::paginate(5);
         $users = User::all();
         $categories = Category::all();
-        return view('threads.index',compact('threads','users','categories'));
+        $like=Like::where('likeable_type','App\Models\Thread');
+        return view('threads.index',compact('threads','users','categories','like'));
     }
 
     /**
