@@ -190,7 +190,7 @@
                             <div class="col-md-8">
                                 <div class="form-group">
                                     <label for="inputTopicTags">Tags</label>
-                                    <select name="tags" class="form-control" id="">
+                                    <select name="tags[]" multiple="multiple" class="form-control tags" >
                                         @foreach($tags as $tag)
                                             <option value="{{$tag->id}}">{{$tag->name}}</option>
                                         @endforeach
@@ -399,4 +399,14 @@
             </div>
         </div>
     </main>
+@endsection
+
+@section('js')
+<script type="text/javascript">
+$(".tags").select2({
+    placeholder: "Select Tags",
+    maximumSelectionLength: 2,
+    allowClear: true
+});
+</script>
 @endsection
