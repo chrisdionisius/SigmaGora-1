@@ -6,6 +6,7 @@
 <p>Category : {{$categories->find($thread->category_id)->category_name}}</p>
 <p>{{$thread-> content }} </p>
 <p>{{$thread->id}}</p>
+{{$like->where('likeable_id',$thread->id)->count()}}
 <img src="{{$thread->media}}" alt="{{$thread->title}}">
 @endforeach
 <ul class="pagination justify-content-center mb-4">
