@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\User;
 use App\Like;
 use App\Tag;
+use App\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -72,9 +73,10 @@ class ThreadController extends Controller
     {
         Thread::findOrFail($thread->id);
         $users=User::all();
+        $comments=Comment::all()->where('commentable_type','App\Models\Thread')->where('commentable_id',$thread->id);
         $like=Like::where('likeable_type','App\Models\Thread')->where('likeable_id',$thread->id)->count();
         $categories = Category::all();
-        return view('threads.show',compact('thread','users','categories','like'));
+        return view('threads.show',compact('thread','users','categories','like','comments'));
     }
 
     /**

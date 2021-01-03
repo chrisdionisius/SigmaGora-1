@@ -19,7 +19,15 @@ class Thread extends Model implements Likeable
     }
 
     public function getElapsedAttribute(){
-        return Carbon::now()->diffInDays($this->updated_at);
+        if (Carbon::now()->diffInSeconds($this->updated_at) < 60) {
+            return Carbon::now()->diffInSeconds($this->updated_at)." detik yang lalu";
+        } elseif (Carbon::now()->diffInMinutes($this->updated_at) < 60) {
+            return Carbon::now()->diffInMinutes($this->updated_at)." menit yang lalu";
+        } elseif (Carbon::now()->diffInHours($this->updated_at) < 24) {
+            return Carbon::now()->diffInHours($this->updated_at)." jam yang lalu";
+        }else {
+            return (Carbon::now()->diffInDays($this->updated_at)." hari yang lalu");
+        }
     }
 
     public function tags(){

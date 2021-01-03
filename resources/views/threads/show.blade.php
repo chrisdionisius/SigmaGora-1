@@ -39,33 +39,46 @@
                             <img src="{{$thread->media}}" alt="{{$thread->title}}">
                         </p>
                         <p>
-                            {{substr($thread-> content,0,300) }}
+                            {{$thread->content}}
                         </p>
                     </div>
                     <div class="tt-item-info info-bottom">
                         @if(!auth()->user()->hasLiked($thread))
-                        <a href="#" class="tt-icon-btn">
-                            <form action="/like" method="post">
-                                @csrf
-                                <input type="hidden" name="likeable" value="{{ get_class($thread) }}">
-                                <input type="hidden" name="id" value="{{ $thread->id }}">
-                                <button type="submit" class="btn btn-primary">
-                                    Like
-                                </button>
-                            </form>
-                            @else
-                            <form action="/like" method="post">
-                                @method('DELETE')
-                                @csrf
-                                <input type="hidden" name="likeable" value="{{ get_class($thread) }}">
-                                <input type="hidden" name="id" value="{{ $thread->id }}">
-                                <button type="submit" class="btn btn-primary">
-                                    Dislike
-                                </button>
-                            </form>
-                            @endif
-                            <span class="tt-text">{{$like}}</span>
-                            <a href="#" class="tt-icon-btn">
+                        <form action="/like" method="post">
+                            @csrf
+                            <input type="hidden" name="likeable" value="{{ get_class($thread) }}">
+                            <input type="hidden" name="id" value="{{ $thread->id }}">
+                            <button type="submit" class="btn btn-primary">
+                                <a href="#" class="tt-icon-btn">
+                                    <i class="tt-icon">
+                                        <svg>
+                                            <use xlink:href="#icon-like"></use>
+                                        </svg>
+                                    </i>
+                                    <span class="tt-text">{{$like}}</span>
+                                </a>
+                            </button>
+                        </form>
+                        @else
+                        <form action="/like" method="post">
+                            @method('DELETE')
+                            @csrf
+                            <input type="hidden" name="likeable" value="{{ get_class($thread) }}">
+                            <input type="hidden" name="id" value="{{ $thread->id }}">
+                            <button type="submit" class="btn btn-primary">
+                                <a href="#" class="tt-icon-btn" style="color:#007bff">
+                                    <i class="tt-icon" style="color:#007bff">
+                                        <svg>
+                                            <use xlink:href="#icon-like"></use>
+                                        </svg>
+                                    </i>
+                                    <span class="tt-text">{{$like}}</span>
+                                </a>
+                            </button>
+                        </form>
+                        @endif
+
+                        <!-- <a href="#" class="tt-icon-btn">
                                 <i class="tt-icon"><svg>
                                         <use xlink:href="#icon-dislike"></use>
                                     </svg></i>
@@ -76,23 +89,23 @@
                                         <use xlink:href="#icon-favorite"></use>
                                     </svg></i>
                                 <span class="tt-text">12</span>
-                            </a>
-                            <div class="col-separator"></div>
-                            <a href="#" class="tt-icon-btn tt-hover-02 tt-small-indent">
-                                <i class="tt-icon"><svg>
-                                        <use xlink:href="#icon-share"></use>
-                                    </svg></i>
-                            </a>
-                            <a href="#" class="tt-icon-btn tt-hover-02 tt-small-indent">
-                                <i class="tt-icon"><svg>
-                                        <use xlink:href="#icon-flag"></use>
-                                    </svg></i>
-                            </a>
-                            <a href="#" class="tt-icon-btn tt-hover-02 tt-small-indent">
-                                <i class="tt-icon"><svg>
-                                        <use xlink:href="#icon-reply"></use>
-                                    </svg></i>
-                            </a>
+                            </a> -->
+                        <div class="col-separator"></div>
+                        <a href="#" class="tt-icon-btn tt-hover-02 tt-small-indent">
+                            <i class="tt-icon"><svg>
+                                    <use xlink:href="#icon-share"></use>
+                                </svg></i>
+                        </a>
+                        <a href="#" class="tt-icon-btn tt-hover-02 tt-small-indent">
+                            <i class="tt-icon"><svg>
+                                    <use xlink:href="#icon-flag"></use>
+                                </svg></i>
+                        </a>
+                        <a href="#" class="tt-icon-btn tt-hover-02 tt-small-indent">
+                            <i class="tt-icon"><svg>
+                                    <use xlink:href="#icon-reply"></use>
+                                </svg></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -222,6 +235,7 @@
                     </div>
                 </div>
             </div>
+            @foreach($comments as $comment)
             <div class="tt-item">
                 <div class="tt-single-topic">
                     <div class="tt-item-header pt-noborder">
@@ -232,19 +246,17 @@
                                     </svg></i>
                             </div>
                             <div class="tt-avatar-title">
-                                <a href="#">tesla02</a>
+                                <a href="#">{{$users->find($comment->user_id)->name}} </a>
                             </div>
                             <a href="#" class="tt-info-time">
                                 <i class="tt-icon"><svg>
                                         <use xlink:href="#icon-time"></use>
-                                    </svg></i>6 Jan,2019
+                                    </svg></i>{{$comment->elapsed}}
                             </a>
                         </div>
                     </div>
                     <div class="tt-item-description">
-                        Finally!<br>
-                        Are there any special recommendations for design or an updated guide that includes new
-                        preview sizes, including retina displays?
+                        {{$comment->content}}
                     </div>
                     <div class="tt-item-info info-bottom">
                         <a href="#" class="tt-icon-btn">
@@ -284,7 +296,8 @@
                     </div>
                 </div>
             </div>
-            <div class="tt-item">
+            @endforeach
+            <!-- <div class="tt-item">
                 <div class="tt-single-topic">
                     <div class="tt-item-header pt-noborder">
                         <div class="tt-item-info info-top">
@@ -693,7 +706,7 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="tt-wrapper-inner">
             <h4 class="tt-title-separator"><span>You’ve reached the end of replies</span></h4>
@@ -722,7 +735,7 @@
         <div class="tt-wrapper-inner">
             <div class="pt-editor form-default">
                 <h6 class="pt-title">Post Your Reply</h6>
-                
+
                 <div class="pt-row">
                     <div class="col-left">
                         <ul class="pt-edit-btn">
@@ -799,28 +812,29 @@
                     </div>
                 </div>
                 <form action="{{route('addComment',$thread->id)}}" method="post">
-                @csrf
-                <div class="form-group">
-                    <textarea name="content" class="form-control" rows="5" placeholder="Lets get started"></textarea>
-                </div>
-                <div class="pt-row">
+                    @csrf
+                    <div class="form-group">
+                        <textarea name="content" class="form-control" rows="5"
+                            placeholder="Lets get started"></textarea>
+                    </div>
+                    <div class="pt-row">
 
-                    <div class="col-auto">
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="checkBox21" name="checkbox" checked="">
-                            <label for="checkBox21">
-                                <span class="check"></span>
-                                <span class="box"></span>
-                                <span class="tt-text">Subscribe to this topic.</span>
-                            </label>
+                        <div class="col-auto">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="checkBox21" name="checkbox" checked="">
+                                <label for="checkBox21">
+                                    <span class="check"></span>
+                                    <span class="box"></span>
+                                    <span class="tt-text">Subscribe to this topic.</span>
+                                </label>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="col-auto">
-                    <button type="submit" class="btn btn-secondary btn-width-lg">Reply</button>
-                    </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-secondary btn-width-lg">Sub</button>
+                        </div>
 
-                </div>
+                    </div>
                 </form>
             </div>
         </div>
