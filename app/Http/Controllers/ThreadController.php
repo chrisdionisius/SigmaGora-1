@@ -107,6 +107,7 @@ class ThreadController extends Controller
             $data=$request->merge(['media'=>$path]);
         }
         $thread->update($request->all());
+        $thread->tags()->sync($request->tags);
         return redirect('/threads');
     }
 
