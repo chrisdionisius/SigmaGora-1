@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('judul','Show')
+@section('judul','Home')
 @section('content')
 
 <main id="tt-pageContent">
