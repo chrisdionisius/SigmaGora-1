@@ -22,7 +22,7 @@ class ThreadController extends Controller
         $threads = Thread::paginate(5);
         $users = User::all();
         $categories = Category::all();
-        return view('threads.thread',compact('threads','users','categories','like'));
+        return view('threads.index',compact('threads','users','categories','like'));
     }
 
     /**
@@ -71,7 +71,7 @@ class ThreadController extends Controller
         $users=User::all();
         $like=Like::where('likeable_type','App\Models\Thread')->where('likeable_id',$thread->id)->count();
         $categories = Category::all();
-        return view('threads.topic',compact('thread','users','categories','like'));
+        return view('threads.show',compact('thread','users','categories','like'));
     }
 
     /**
