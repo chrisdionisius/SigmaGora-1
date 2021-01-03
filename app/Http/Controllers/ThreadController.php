@@ -45,17 +45,20 @@ class ThreadController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request;
-
+        $thread = new Thread;
+        $thread->user_id=Auth::user()->id;
+        $thread->category_id=$request->category_id;
+        $thread->title=$request->title;
+        $thread->content=$request->content;
         if($request->file('image')){
             $file=$request->file('image');
             $nama=time().'.'.$file->getClientOriginalExtension();
             $file->storeAs('public/thread',$nama); 
             $path='/storage/thread/'.$nama;
-            $data=$request->merge(['media'=>$path,'user_id'=>Auth::user()->id]);
+            $thread->media=$path;
         }
-        Thread::create($data->all());
-        Thread::tags()->sync($request->tags);
+        $thread->save();
+        $thread->tags()->sync($request->tags);
         return redirect('/threads');
     }
 
@@ -83,7 +86,8 @@ class ThreadController extends Controller
     public function edit(Thread $thread)
     {
         $categories = Category::all();
-        return view('threads.edit',compact('thread','categories'));
+        $tags=Tag::all();
+        return view('threads.edit',compact('thread','categories','tags'));
     }
 
     /**

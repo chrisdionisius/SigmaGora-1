@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Support\Carbon;
 use App\Contracts\Likeable;
 use App\Concerns;
+use App\Tag;
 use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model implements Likeable
