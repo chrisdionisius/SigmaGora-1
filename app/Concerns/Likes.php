@@ -3,6 +3,7 @@ namespace App\Concerns;
 
 use App\Contracts\Likeable;
 use App\Like;
+use Illuminate\Database\Eloquent\Builder;
 
 trait Likes
 {
@@ -31,7 +32,9 @@ trait Likes
             return $this;
         }
 
-        $likeable->likes()->whereHas('user', fn($q) => $q->whereId($this->id))->delete();
+        $likeable->likes()->whereHas('user', function(Builder $query) {
+            $query->whereId($this->id);
+            })->delete();
 
         return $this;
     }
@@ -42,7 +45,9 @@ trait Likes
             return false;
         }
 
-        return $likeable->likes()->whereHas('user', fn($q) =>  $q->whereId($this->id))->exists();
+        return $likeable->likes()->whereHas('user', function(Builder $query) {
+            return $query->whereId($this->id);
+            })->exists();
     }
 }
 ?>
