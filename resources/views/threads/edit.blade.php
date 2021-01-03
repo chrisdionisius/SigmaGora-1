@@ -191,6 +191,7 @@
                             <div class="col-md-8">
                                 <div class="form-group">
                                     <label for="inputTopicTags">Tags</label>
+                                    
                                     <input type="text" name="name" class="form-control" id="inputTopicTags"
                                         placeholder="Use comma to separate tags">
                                 </div>
