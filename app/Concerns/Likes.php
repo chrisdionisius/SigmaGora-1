@@ -30,9 +30,7 @@ trait Likes
         if (! $this->hasLiked($likeable)) {
             return $this;
         }
-
         $likeable->likes()->whereHas('user', fn($q) => $q->whereId($this->id))->delete();
-
         return $this;
     }
 
