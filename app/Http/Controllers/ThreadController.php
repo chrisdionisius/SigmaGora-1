@@ -34,7 +34,7 @@ class ThreadController extends Controller
     {
         $tags=Tag::all();
         $categories = Category::all();
-        return view('threads.form',compact('categories'));
+        return view('threads.form',compact('categories','tags'));
     }
 
     /**

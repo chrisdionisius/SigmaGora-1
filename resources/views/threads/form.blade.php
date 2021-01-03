@@ -190,6 +190,11 @@
                             <div class="col-md-8">
                                 <div class="form-group">
                                     <label for="inputTopicTags">Tags</label>
+                                    <select name="tags" class="form-control" id="">
+                                        @foreach($tags as $tag)
+                                            <option value="{{$tag->id}}">{{$tag->name}}</option>
+                                        @endforeach
+                                    </select>
                                     <input type="text" name="name" class="form-control" id="inputTopicTags"
                                         placeholder="Use comma to separate tags">
                                 </div>
