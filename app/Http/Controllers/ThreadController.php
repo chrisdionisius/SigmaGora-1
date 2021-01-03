@@ -6,6 +6,7 @@ use App\Models\Thread;
 use App\Models\Category;
 use App\User;
 use App\Like;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,6 +32,7 @@ class ThreadController extends Controller
      */
     public function create()
     {
+        $tags=Tag::all();
         $categories = Category::all();
         return view('threads.form',compact('categories'));
     }
@@ -53,6 +55,7 @@ class ThreadController extends Controller
             $data=$request->merge(['media'=>$path,'user_id'=>Auth::user()->id]);
         }
         Thread::create($data->all());
+        Thread::tags()->sync($request->tags);
         return redirect('/threads');
     }
 

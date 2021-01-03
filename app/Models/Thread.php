@@ -21,4 +21,7 @@ class Thread extends Model implements Likeable
         return Carbon::now()->diffInDays($this->updated_at);
     }
 
+    public function tags(){
+        return $this->belongsToMany('App\Tag');
+    }
 }
