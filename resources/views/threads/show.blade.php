@@ -4,6 +4,7 @@
 <h4>{{$users->find($thread->user_id)->name}}</h4>
 <p>Category : {{$categories->find($thread->category_id)->category_name}}</p>
 <p>{{substr($thread-> content,0,300) }} </p>
+<p>Like {{$like}} </p>
 @if(!auth()->user()->hasLiked($thread))
     <form action="/like" method="post">
         @csrf

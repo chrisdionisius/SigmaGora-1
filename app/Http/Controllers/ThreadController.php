@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Thread;
 use App\Models\Category;
 use App\User;
+use App\Like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -64,8 +65,9 @@ class ThreadController extends Controller
     {
         Thread::findOrFail($thread->id);
         $users=User::all();
+        $like=Like::where('likeable_type','App\Models\Thread')->where('likeable_id',$thread->id)->count();
         $categories = Category::all();
-        return view('threads.show',compact('thread','users','categories'));
+        return view('threads.show',compact('thread','users','categories','like'));
     }
 
     /**
