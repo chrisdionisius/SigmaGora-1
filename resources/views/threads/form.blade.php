@@ -195,8 +195,6 @@
                                             <option value="{{$tag->id}}">{{$tag->name}}</option>
                                         @endforeach
                                     </select>
-                                    <input type="text" name="name" class="form-control" id="inputTopicTags"
-                                        placeholder="Use comma to separate tags">
                                 </div>
                             </div>
                         </div>
