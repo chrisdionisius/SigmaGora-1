@@ -23,3 +23,4 @@ Route::get('/index', 'ThreadController@index')->name('index');
 Route::resource('threads','ThreadController');
 Route::post('like', 'LikesController@like');
 Route::delete('like', 'LikesController@dislike');
+Route::post('/comment/addComment/{thread}','CommentController@addComment')->name('addComment');
