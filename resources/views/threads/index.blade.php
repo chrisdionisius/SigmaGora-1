@@ -19,7 +19,7 @@
             <div class="tt-item">
                 <div class="tt-col-avatar">
                     <svg class="tt-icon">
-                        <use xlink:href="#icon-ava-n"></use>
+                        <use xlink:href="#icon-ava-z"></use>
                     </svg>
                 </div>
                 <div class="tt-col-description">

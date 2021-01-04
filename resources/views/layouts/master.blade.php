@@ -24,7 +24,7 @@
     @include('partials.popupsetting')
     @include('partials.pagetopic')
     @include('partials.modalfade')
-    <script src="js/bundle.js"></script>
+    <script src="{{asset ('theme/js/bundle.js')}}"></script>
     <script src="{{asset('theme/js/app.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     @yield('js');

@@ -124,4 +124,9 @@ class ThreadController extends Controller
         $thread->delete();
         return redirect('/threads');
     }
+    
+    public function test()
+    {
+        return view('threads.test');
+    }
 }

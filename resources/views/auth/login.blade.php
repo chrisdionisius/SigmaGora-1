@@ -121,7 +121,7 @@
                                 </div>
                             </div>
                         </div>
-                        <p>Don’t have an account? <a href="#" class="tt-underline">Signup here</a></p>
+                        <p>Don’t have an account? <a href="{{ route('register') }}" class="tt-underline">Signup here</a></p>
                         <div class="tt-notes">
                             By Logging in, signing in or continuing, I agree to
                             Forum19’s <a href="#" class="tt-underline">Terms of Use</a> and <a href="#"
@@ -132,7 +132,7 @@
             </div>
         </div>
     </main>
-    <script src="js/bundle.js"></script>
+    <script src="{{asset ('theme/js/bundle.js')}}"></script>
     <svg width="0" height="0" class="hidden">
         <symbol aria-hidden="true" data-prefix="fab" data-icon="facebook-f" xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 264 512" id="facebook-f-brands">

@@ -11,16 +11,16 @@
                 <!-- /toggle mobile menu -->
                 <!-- logo -->
                 <div class="tt-logo">
-                    <a href="index.html"><img src="{{asset('theme/images/logo.png')}}" alt=""></a>
+                    <a href="index.html"><img src="{{asset('theme/images/sigma.jpg')}}" alt=""></a>
                 </div>
                 <!-- /logo -->
                 <!-- desctop menu -->
                 <div class="tt-desktop-menu">
                     <nav>
                         <ul>
-                            <li><a href="page-categories.html"><span>Categories</span></a></li>
-                            <li><a href="page-tabs.html"><span>Trending</span></a></li>
-                            <li><a href="/threads/create"><span>New</span></a></li>
+                            <li><a href="/"><span>Trending</span></a></li>
+                            <li><a href="/categories"><span>Categories</span></a></li>
+                            <li><a href="/threads"><span>My thread</span></a></li>
                             <li>
                                 <a href="page-single-user.html"><span>Pages</span></a>
                                 <ul>
@@ -146,12 +146,39 @@
                                 <use xlink:href="#icon-ava-a"></use>
                             </svg></i>
                     </div>
-                    <div class="custom-select-01">
-                        <select>
-                            <option value="Default Sorting">{{Auth::user()->name ?? 'Login'}}</option>
-                            <option value="value 01">value 01</option>
-                            <option value="value 02">value 02</option>
-                        </select>
+                    <div class="tt-desktop-menu">
+                        <ul class="navbar-nav ml-auto">
+                            <!-- Authentication Links -->
+                            @guest
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            </li>
+                            @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                            @endif
+                            @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                            @endguest
+                        </ul>
                     </div>
                 </div>
             </div>

@@ -29,7 +29,7 @@ class LoginController extends Controller
     //protected $redirectTo = RouteServiceProvider::HOME;
     protected function authenticated()
     {
-    return redirect('/index');
+        return redirect('/');
     }
 
     /**

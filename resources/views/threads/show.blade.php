@@ -120,7 +120,7 @@
                                 <i class="tt-icon"><svg>
                                         <use xlink:href="#icon-reply"></use>
                                     </svg></i>
-                                <span class="tt-text">283</span>
+                                <span class="tt-text">{{$thread->comments->count()}}</span>
                             </a>
                         </div>
                         <div class="tt-item">
@@ -128,7 +128,15 @@
                                 <i class="tt-icon"><svg>
                                         <use xlink:href="#icon-view"></use>
                                     </svg></i>
-                                <span class="tt-text">10.5k</span>
+                                <span class="tt-text">{{views($thread)->count()}}</span>
+                            </a>
+                        </div>
+                        <div class="tt-item">
+                            <a href="#" class="tt-icon-btn tt-position-bottom">
+                                <i class="tt-icon"><svg>
+                                        <use xlink:href="#icon-like"></use>
+                                    </svg></i>
+                                <span class="tt-text">{{$thread->likes->count()}}</span>
                             </a>
                         </div>
                         <div class="tt-item">
@@ -137,14 +145,6 @@
                                         <use xlink:href="#icon-user"></use>
                                     </svg></i>
                                 <span class="tt-text">168</span>
-                            </a>
-                        </div>
-                        <div class="tt-item">
-                            <a href="#" class="tt-icon-btn tt-position-bottom">
-                                <i class="tt-icon"><svg>
-                                        <use xlink:href="#icon-like"></use>
-                                    </svg></i>
-                                <span class="tt-text">2.4k</span>
                             </a>
                         </div>
                         <div class="tt-item">
@@ -164,7 +164,7 @@
                             </a>
                         </div>
                     </div>
-                    <hr>
+                    <!-- <hr>
                     <h6 class="tt-title">Frequent Posters</h6>
                     <div class="tt-row-icon">
                         <div class="tt-item">
@@ -216,7 +216,7 @@
                                 </svg>
                             </a>
                         </div>
-                    </div>
+                    </div> -->
                     <hr>
                     <div class="row-object-inline form-default">
                         <h6 class="tt-title">Sort replies by:</h6>
@@ -258,7 +258,7 @@
                         </div>
                     </div>
                     <div class="tt-item-description">
-                        {{$comment->content}}
+                        {!! $comment->content !!}
                     </div>
                     <div class="tt-item-info info-bottom">
                         <div class="tt-item-info info-bottom">
@@ -275,7 +275,7 @@
                                             </svg>
                                         </i>
                                         <span
-                                            class="tt-text">{{$thread->likes->count()}}</span>
+                                            class="tt-text">{{$comment->likes->count()}}</span>
                                     </a>
                                 </button>
                             </form>
