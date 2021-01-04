@@ -75,19 +75,8 @@ class ThreadController extends Controller
         $expiresAt = now()->addHours(3);
         $users=User::all();
         $categories = Category::all();
-        $tlike=Like::where('likeable_type','App\Models\Thread')->where('likeable_id',$thread->id)->count();
-        $clike=Like::where('likeable_type','App\Comment');
         views($thread)->cooldown($expiresAt)->record();
-        return view('threads.show',compact('thread','users','categories','tlike','clike'));
-    }
-    
-    public function comment($id){
-        $clike = DB::table('likes')
-            ->select('likes.id')
-            ->leftJoin('comments', 'comments.id', '=', 'likes.likeable_id')
-            ->where('likeable_type','App\Comment')
-            ->count();
-        return $clike;
+        return view('threads.show',compact('thread','users','categories'));
     }
     /**
      * Show the form for editing the specified resource.

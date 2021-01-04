@@ -47,7 +47,7 @@
                 <div class="tt-col-category">
                     <span class="tt-color05 tt-badge">{{$categories->find($thread->category_id)->category_name}}</span>
                 </div>
-                <div class="tt-col-value hide-mobile">{{$like->where('likeable_id',$thread->id)->count()}}</div>
+                <div class="tt-col-value hide-mobile">{{$thread->likes->count()}}</div>
                 <div class="tt-col-value tt-color-select hide-mobile">{{$thread->comments->count()}}</div>
                 <div class="tt-col-value hide-mobile">{{views($thread)->count()}}</div>
                 <div class="tt-col-value hide-mobile">{{$thread-> elapsed}}</div>

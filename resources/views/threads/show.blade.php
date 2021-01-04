@@ -68,13 +68,13 @@
                             <input type="hidden" name="likeable" value="{{ get_class($thread) }}">
                             <input type="hidden" name="id" value="{{ $thread->id }}">
                             <button type="submit" class="btn btn-primary biru">
-                                <a href="#" class="biru">
+                                <a class="biru">
                                     <i class="tt-icon biru">
                                         <svg>
                                             <use xlink:href="#icon-like"></use>
                                         </svg>
                                     </i>
-                                    <span class="tt-text biru">{{$tlike}}</span>
+                                    <span class="tt-text biru">{{$thread->likes->count()}}</span>
                                 </a>
                             </button>
                         </form>
@@ -275,7 +275,7 @@
                                             </svg>
                                         </i>
                                         <span
-                                            class="tt-text">{{$clike->where('likeable_id',$comment->id)->count()}}</span>
+                                            class="tt-text">{{$thread->likes->count()}}</span>
                                     </a>
                                 </button>
                             </form>
@@ -293,7 +293,7 @@
                                             </svg>
                                         </i>
                                         <span
-                                            class="tt-text biru">{{$clike->where('likeable_id',$comment->id)->count()}}</span>
+                                            class="tt-text biru">{{$comment->likes->count()}}</span>
                                     </a>
                                 </button>
                             </form>
