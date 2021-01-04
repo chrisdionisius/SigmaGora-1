@@ -289,7 +289,7 @@
                                                 <use xlink:href="#icon-like"></use>
                                             </svg>
                                         </i>
-                                        <span class="tt-text biru">{{$clike->where('likeable_id',$comment->id)->count()->get()}}</span>
+                                        <span class="tt-text biru">{{$clike->where('likeable_id',$comment->id)->count()}}</span>
                                     </a>
                                 </button>
                             </form>

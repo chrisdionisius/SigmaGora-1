@@ -10,6 +10,7 @@ use App\Tag;
 use App\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ThreadController extends Controller
 {    
@@ -73,13 +74,22 @@ class ThreadController extends Controller
     {
         Thread::findOrFail($thread->id);
         $users=User::all();
-        $comments=Comment::all()->where('commentable_type','App\Models\Thread')->where('commentable_id',$thread->id);
-        $tlike=Like::where('likeable_type','App\Models\Thread')->where('likeable_id',$thread->id)->count();
-        $clike=Like::where('likeable_type','App\Models\Comment');
         $categories = Category::all();
+        $comments=Comment::all()->where('commentable_type','App\Models\Thread')->where('commentable_id',$thread->id);
+        
+        $tlike=Like::where('likeable_type','App\Models\Thread')->where('likeable_id',$thread->id)->count();
+        $clike=Like::where('likeable_type','App\Comment');
         return view('threads.show',compact('thread','users','categories','comments','tlike','clike'));
     }
-
+    
+    public function comment($id){
+        $clike = DB::table('likes')
+            ->select('likes.id')
+            ->leftJoin('comments', 'comments.id', '=', 'likes.likeable_id')
+            ->where('likeable_type','App\Comment')
+            ->count();
+        return $clike;
+    }
     /**
      * Show the form for editing the specified resource.
      *
