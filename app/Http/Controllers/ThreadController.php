@@ -20,7 +20,12 @@ class ThreadController extends Controller
     }
     public function index()
     {
-        $threads = Thread::paginate(5)->sortBy('likes');
+        $threads = Thread::withCount('likes')->orderBy('likes_count','asc')->paginate(5);
+        return view('threads.index',compact('threads'));
+    }
+
+    public function sortBy($col){
+        $threads = Thread::withCount($col)->orderBy($col.'_count','desc')->paginate(5);
         return view('threads.index',compact('threads'));
     }
 
