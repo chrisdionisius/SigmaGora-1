@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Thread;
 
 class HomeController extends Controller
 {
@@ -24,5 +25,10 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function dashboard(){
+        $threads = Thread::withCount('likes')->orderBy('likes_count','asc')->paginate(5);
+        return view('threads.index',compact('threads'));
     }
 }

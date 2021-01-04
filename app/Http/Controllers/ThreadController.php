@@ -4,10 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Thread;
 use App\Models\Category;
-use App\User;
-use App\Like;
 use App\Tag;
-use App\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +17,7 @@ class ThreadController extends Controller
     }
     public function index()
     {
-        $threads = Thread::withCount('likes')->orderBy('likes_count','asc')->paginate(5);
+        $threads = Thread::withCount('likes')->where('user_id',Auth::user()->id)->orderBy('likes_count','asc')->paginate(5);
         return view('threads.index',compact('threads'));
     }
 
@@ -86,9 +83,13 @@ class ThreadController extends Controller
      */
     public function edit(Thread $thread)
     {
-        $categories = Category::all();
-        $tags=Tag::all();
-        return view('threads.edit',compact('thread','categories','tags'));
+        if ($thread->user_id !== auth()->id()){
+            return redirect('/');
+        }else{
+            $categories = Category::all();
+            $tags=Tag::all();
+            return view('threads.edit',compact('thread','categories','tags'));
+        }
     }
 
     /**
