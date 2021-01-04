@@ -49,6 +49,10 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
+  .biru{
+    color: #2172cd;
+    fill: #2172cd;
+  }
   .pagination {
     display: -webkit-box;
     display: -ms-flexbox;

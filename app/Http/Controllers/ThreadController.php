@@ -74,9 +74,10 @@ class ThreadController extends Controller
         Thread::findOrFail($thread->id);
         $users=User::all();
         $comments=Comment::all()->where('commentable_type','App\Models\Thread')->where('commentable_id',$thread->id);
-        $like=Like::where('likeable_type','App\Models\Thread')->where('likeable_id',$thread->id)->count();
+        $tlike=Like::where('likeable_type','App\Models\Thread')->where('likeable_id',$thread->id)->count();
+        $clike=Like::where('likeable_type','App\Models\Comment');
         $categories = Category::all();
-        return view('threads.show',compact('thread','users','categories','like','comments'));
+        return view('threads.show',compact('thread','users','categories','comments','tlike','clike'));
     }
 
     /**

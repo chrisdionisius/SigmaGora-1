@@ -4,8 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
-class Comment extends Model
+use App\Contracts\Likeable;
+use App\Concerns;
+class Comment extends Model implements Likeable
 {
+    
+    use Concerns\Likeable;
     public function commentable(){
         return $this->morphTo();
     }
