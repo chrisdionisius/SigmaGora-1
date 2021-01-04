@@ -20,13 +20,13 @@
                         <ul>
                             <li><a href="page-categories.html"><span>Categories</span></a></li>
                             <li><a href="page-tabs.html"><span>Trending</span></a></li>
-                            <li><a href="page-create-topic.html"><span>New</span></a></li>
+                            <li><a href="/threads/create"><span>New</span></a></li>
                             <li>
                                 <a href="page-single-user.html"><span>Pages</span></a>
                                 <ul>
                                     <li><a href="index.html">Home</a></li>
                                     <li><a href="page-single-topic.html">Single Topic</a></li>
-                                    <li><a href="page-create-topic.html">Create Topic</a></li>
+                                    <li><a href="/threads/create">Create Topic</a></li>
                                     <li><a href="page-single-user.html">Single User Activity</a></li>
                                     <li><a href="page-single_threads.html">Single User Threads</a></li>
                                     <li><a href="page-single_replies.html">Single User Replies</a></li>
@@ -148,7 +148,7 @@
                     </div>
                     <div class="custom-select-01">
                         <select>
-                            <option value="Default Sorting">azyrusmax</option>
+                            <option value="Default Sorting">{{Auth::user()->name}}</option>
                             <option value="value 01">value 01</option>
                             <option value="value 02">value 02</option>
                         </select>

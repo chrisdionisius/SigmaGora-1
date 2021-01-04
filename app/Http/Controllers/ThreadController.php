@@ -72,14 +72,13 @@ class ThreadController extends Controller
      */
     public function show(Thread $thread)
     {
-        Thread::findOrFail($thread->id);
+        $expiresAt = now()->addHours(3);
         $users=User::all();
         $categories = Category::all();
-        $comments=Comment::all()->where('commentable_type','App\Models\Thread')->where('commentable_id',$thread->id);
-        
         $tlike=Like::where('likeable_type','App\Models\Thread')->where('likeable_id',$thread->id)->count();
         $clike=Like::where('likeable_type','App\Comment');
-        return view('threads.show',compact('thread','users','categories','comments','tlike','clike'));
+        views($thread)->cooldown($expiresAt)->record();
+        return view('threads.show',compact('thread','users','categories','tlike','clike'));
     }
     
     public function comment($id){

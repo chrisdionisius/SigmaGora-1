@@ -12,9 +12,9 @@
                 <div class="tt-col-value hide-mobile">Pengunjung</div>
                 <div class="tt-col-value">Diposting</div>
             </div>
-            <div class="tt-topic-alert tt-alert-default" role="alert">
+            <!-- <div class="tt-topic-alert tt-alert-default" role="alert">
                 <a href="#" target="_blank">4 new posts</a> are added recently, click here to load them.
-            </div>
+            </div> -->
             @foreach($threads as $thread)
             <div class="tt-item">
                 <div class="tt-col-avatar">
@@ -34,7 +34,9 @@
                                 <li class="show-mobile"><a href="#"><span
                                             class="tt-color05 tt-badge">{{$categories->find($thread->category_id)->category_name}}</span></a>
                                 </li>
-                                <li><a href="#"><span class="tt-badge">videohive</span></a></li>
+                                @foreach($thread->tags as $tag)
+                                <li><a href="#"><span class="tt-badge">{{$tag->name}}</span></a></li>
+                                @endforeach
                             </ul>
                         </div>
                         <div class="col-1 ml-auto show-mobile">
@@ -42,12 +44,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="tt-col-category"><span
-                        class="tt-color05 tt-badge">{{$categories->find($thread->category_id)->category_name}}</span>
+                <div class="tt-col-category">
+                    <span class="tt-color05 tt-badge">{{$categories->find($thread->category_id)->category_name}}</span>
                 </div>
                 <div class="tt-col-value hide-mobile">{{$like->where('likeable_id',$thread->id)->count()}}</div>
-                <div class="tt-col-value tt-color-select hide-mobile">68</div>
-                <div class="tt-col-value hide-mobile">8.3k</div>
+                <div class="tt-col-value tt-color-select hide-mobile">{{$thread->comments->count()}}</div>
+                <div class="tt-col-value hide-mobile">{{views($thread)->count()}}</div>
                 <div class="tt-col-value hide-mobile">{{$thread-> elapsed}}</div>
             </div>
             @endforeach

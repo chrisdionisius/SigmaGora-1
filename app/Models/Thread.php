@@ -7,12 +7,17 @@ use App\Contracts\Likeable;
 use App\Concerns;
 use App\Tag;
 use Illuminate\Database\Eloquent\Model;
+use CyrildeWit\EloquentViewable\InteractsWithViews;
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
 
-class Thread extends Model implements Likeable
+class Thread extends Model implements Likeable, Viewable
 {
     use Concerns\Likeable;
+    use InteractsWithViews;
+
     protected $table = 'threads';
     protected $fillable = ['user_id','category_id','title','content','media'];
+    
     public function thread()
     {
         return $this->hasOne('App\Models\Category');

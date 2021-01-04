@@ -89,7 +89,7 @@
                     </div>
                     <div class="pt-editor">
                         <h6 class="pt-title">Topic Body</h6>
-                        <div class="pt-row">
+                        <!-- <div class="pt-row">
                             <div class="col-left">
                                 <ul class="pt-edit-btn">
                                     <li><button type="button" class="btn-icon">
@@ -162,9 +162,9 @@
                                         </button></li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-group">
-                            <textarea name="content" class="form-control" rows="5"
+                            <textarea name="content" class="form-control ckeditor" rows="5"
                                 placeholder="Lets get started"></textarea>
                         </div>
                         <div class="row">
@@ -400,6 +400,12 @@
 @endsection
 
 @section('js')
+<script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+       $('.ckeditor').ckeditor();
+    });
+</script>
 <script type="text/javascript">
 $(".tags").select2({
     placeholder: "Select Tags",
