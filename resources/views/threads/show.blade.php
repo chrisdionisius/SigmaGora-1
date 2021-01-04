@@ -15,7 +15,7 @@
                                     </svg></i>
                             </div>
                             <div class="tt-avatar-title">
-                                <a href="#">{{$users->find($thread->user_id)->name}}</a>
+                                <a href="#">{{$thread->user->name}}</a>
                             </div>
                             <a href="#" class="tt-info-time">
                                 <i class="tt-icon"><svg>
@@ -29,7 +29,7 @@
                         <div class="tt-item-tag">
                             <ul class="tt-list-badge">
                                 <li><a href="#"><span
-                                            class="tt-color03 tt-badge">{{$categories->find($thread->category_id)->category_name}}</span></a>
+                                            class="tt-color03 tt-badge">{{$thread->category->category_name}}</span></a>
                                 </li>
                             </ul>
                         </div>
@@ -57,7 +57,7 @@
                                             <use xlink:href="#icon-like"></use>
                                         </svg>
                                     </i>
-                                    <span class="tt-text">{{$tlike}}</span>
+                                    <span class="tt-text">{{$thread->likes->count()}} </span>
                                 </a>
                             </button>
                         </form>
@@ -248,7 +248,7 @@
                                     </svg></i>
                             </div>
                             <div class="tt-avatar-title">
-                                <a href="#">{{$users->find($comment->user_id)->name}} </a>
+                                <a href="#">{{$comment->user->name}} </a>
                             </div>
                             <a href="#" class="tt-info-time">
                                 <i class="tt-icon"><svg>

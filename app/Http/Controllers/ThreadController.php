@@ -20,11 +20,8 @@ class ThreadController extends Controller
     }
     public function index()
     {
-        $like=Like::where('likeable_type','App\Models\Thread');
-        $threads = Thread::paginate(5);
-        $users = User::all();
-        $categories = Category::all();
-        return view('threads.index',compact('threads','users','categories','like'));
+        $threads = Thread::paginate(5)->sortBy('likes');
+        return view('threads.index',compact('threads'));
     }
 
     /**
@@ -73,10 +70,8 @@ class ThreadController extends Controller
     public function show(Thread $thread)
     {
         $expiresAt = now()->addHours(3);
-        $users=User::all();
-        $categories = Category::all();
         views($thread)->cooldown($expiresAt)->record();
-        return view('threads.show',compact('thread','users','categories'));
+        return view('threads.show',compact('thread'));
     }
     /**
      * Show the form for editing the specified resource.

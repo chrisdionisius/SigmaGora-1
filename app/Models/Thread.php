@@ -18,10 +18,7 @@ class Thread extends Model implements Likeable, Viewable
     protected $table = 'threads';
     protected $fillable = ['user_id','category_id','title','content','media'];
     
-    public function thread()
-    {
-        return $this->hasOne('App\Models\Category');
-    }
+    
 
     public function getElapsedAttribute(){
         if (Carbon::now()->diffInSeconds($this->updated_at) < 60) {
@@ -37,6 +34,16 @@ class Thread extends Model implements Likeable, Viewable
 
     public function tags(){
         return $this->belongsToMany('App\Tag');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo('App\Models\Category');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 
     public function comments()

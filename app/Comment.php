@@ -13,6 +13,12 @@ class Comment extends Model implements Likeable
     public function commentable(){
         return $this->morphTo();
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+    
     public function getElapsedAttribute(){
         if (Carbon::now()->diffInSeconds($this->updated_at) < 60) {
             return Carbon::now()->diffInSeconds($this->updated_at)." detik yang lalu";

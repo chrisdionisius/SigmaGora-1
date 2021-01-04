@@ -11,7 +11,7 @@
                 <!-- /toggle mobile menu -->
                 <!-- logo -->
                 <div class="tt-logo">
-                    <a href="index.html"><img src="images/logo.png" alt=""></a>
+                    <a href="index.html"><img src="{{asset('theme/images/logo.png')}}" alt=""></a>
                 </div>
                 <!-- /logo -->
                 <!-- desctop menu -->
@@ -148,7 +148,7 @@
                     </div>
                     <div class="custom-select-01">
                         <select>
-                            <option value="Default Sorting">{{Auth::user()->name}}</option>
+                            <option value="Default Sorting">{{Auth::user()->name ?? 'Login'}}</option>
                             <option value="value 01">value 01</option>
                             <option value="value 02">value 02</option>
                         </select>
