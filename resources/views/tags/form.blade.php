@@ -7,7 +7,8 @@
                 <h1 class="tt-title-border">
                     Create New Tag
                 </h1>
-                <form class="form-default form-create-topic" action="/tags" method="post">
+                <form name="FrmCreate_Tags" class="form-default form-create-topic" action="/tags" method="post"
+                onsubmit="return validateForm()">
                     @csrf
                     <div class="form-group">
                         <label for="inputTopicTitle">New Tag</label>
@@ -44,5 +45,14 @@ $(".tags").select2({
     maximumSelectionLength: 2,
     allowClear: true
 });
+</script>
+<script>
+function validateForm() {
+  var tags = document.forms["FrmCreate_Tags"]["name"].value;
+  if (tags == "" || tags == null) {
+    alert("Please Fill tag Name");
+    return false;
+  }
+}
 </script>
 @endsection

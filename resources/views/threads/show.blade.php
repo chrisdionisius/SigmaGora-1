@@ -369,7 +369,7 @@
             <div class="tt-wrapper-inner">
                 <div class="pt-editor form-default">
                     <h6 class="pt-title">Post Your Reply</h6>
-                    <form action="{{route('addComment',$thread->id)}}" method="post">
+                    <form name="FrmComment" action="{{route('addComment',$thread->id)}}" method="post">
                         @csrf
                         <div class="form-group">
                             <textarea name="content" class="form-control ckeditor" rows="5"
@@ -386,7 +386,6 @@
                                     </label>
                                 </div> -->
                             </div>
-
                             <div class="col-auto">
                                 @guest
                                 <a href="/login">
@@ -396,7 +395,6 @@
                                 <button type="submit" class="btn btn-secondary btn-width-lg">Reply</button>
                                 @endguest
                             </div>
-
                         </div>
                     </form>
                 </div>
@@ -411,4 +409,13 @@ $(document).ready(function() {
     $('.ckeditor').ckeditor();
 });
 </script>
+<!-- <script>
+function validateForm() {
+  var reply = document.forms["FrmComment"]["content"].value;
+  if (reply == "" || reply == null) {
+    alert("Please Fill Your Reply");
+    return false;
+  }
+}
+</script> -->
 @endsection

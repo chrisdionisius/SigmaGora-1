@@ -7,8 +7,8 @@
                 <h1 class="tt-title-border">
                     Create New Thread
                 </h1>
-                <form class="form-default form-create-topic" action="/threads" method="post"
-                    enctype="multipart/form-data">
+                <form name="FrmInput" class="form-default form-create-topic" action="/threads" method="post"
+                    enctype="multipart/form-data" onsubmit="return validateForm()">
                     @csrf
                     <div class="form-group">
                         <label for="inputTopicTitle">Thread Title</label>
@@ -224,5 +224,18 @@ $(".tags").select2({
     maximumSelectionLength: 2,
     allowClear: true
 });
+</script>
+<script>
+function validateForm() {
+  var tittle = document.forms["FrmInput"]["title"].value;
+  var content = document.forms["FrmInput"]["content"].value;
+  var category = document.forms["FrmInput"]["category_id"].value;
+  var tags = document.forms["FrmInput"]["tags[]"].value;
+  if (tittle == "" || tittle == null || content == "" || content == null || 
+        category == "" || category == null || tags == "" || tags == null) {
+    alert("Please Fill All Required Field");
+    return false;
+  }
+}
 </script>
 @endsection

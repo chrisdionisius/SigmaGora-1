@@ -7,7 +7,8 @@
                 <h1 class="tt-title-border">
                     Create New Category
                 </h1>
-                <form class="form-default form-create-topic" action="/categories" method="post">
+                <form name="FrmCreate_Category" class="form-default form-create-topic" action="/categories" method="post"
+                onsubmit="return validateForm()" >
                     @csrf
                     <div class="form-group">
                         <label for="inputTopicTitle">New Category</label>
@@ -44,5 +45,14 @@ $(".tags").select2({
     maximumSelectionLength: 2,
     allowClear: true
 });
+</script>
+<script>
+function validateForm() {
+  var category = document.forms["FrmCreate_Category"]["category_name"].value;
+  if (category == "" || category == null) {
+    alert("Please Fill Category Name");
+    return false;
+  }
+}
 </script>
 @endsection
