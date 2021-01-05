@@ -31,11 +31,14 @@
                     <div class="row align-items-center no-gutters">
                         <div class="col-11">
                             <ul class="tt-list-badge">
-                                <li class="show-mobile"><a href="#"><span
-                                            class="tt-color05 tt-badge">{{$thread->category->category_name}}</span></a>
+                                <li class="show-mobile">
+                                    <a href="/threads/category/{{$thread->category->id}}">
+                                        <span class="tt-color05 tt-badge">{{$thread->category->category_name}}</span>
+                                    </a>
                                 </li>
                                 @foreach($thread->tags as $tag)
-                                <li><a href="#"><span class="tt-badge">{{$tag->name}}</span></a></li>
+                                <li><a href="/threads/tag/{{$tag->id}}"><span class="tt-badge">{{$tag->name}}</span></a>
+                                </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -45,7 +48,9 @@
                     </div>
                 </div>
                 <div class="tt-col-category">
-                    <span class="tt-color05 tt-badge">{{$thread->category->category_name}}</span>
+                    <a href="/threads/category/{{$thread->category->id}}">
+                        <span class="tt-color05 tt-badge">{{$thread->category->category_name}}</span>
+                    </a>
                 </div>
                 <div class="tt-col-value hide-mobile">{{$thread->likes->count()}}</div>
                 <div class="tt-col-value tt-color-select hide-mobile">{{$thread->comments->count()}}</div>

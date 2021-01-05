@@ -120,13 +120,15 @@ class ThreadController extends Controller
         return redirect('/threads');
     }
     public function showByCategory(Category $category){
-        $threads = Thread::where('category_id',$category->id)->withCount('likes','views','comments')->orderBy('likes_count','desc')->orderBy('views_count', 'desc')->orderBy('comments_count', 'desc')->paginate(5);
+        $threads=$category->threads();
         return view('threads.index',compact('threads'));
-    }   
-    public function showByTags(Tag $tag){
-        $threads = Thread::where($thread->tags,$tag)->withCount('likes','views','comments')->orderBy('likes_count','desc')->orderBy('views_count', 'desc')->orderBy('comments_count', 'desc')->paginate(5);
+    }
+
+    public function showByTag(Tag $tag){
+        $threads=$tag->threads();
         return view('threads.index',compact('threads'));
-    }    
+    } 
+
     public function test()
     {
         return view('threads.test');

@@ -1,17 +1,17 @@
 @extends('layouts.master')
-@section('judul','Categories')
+@section('judul','Tags')
 @section('content')
 <main id="tt-pageContent">
     <div class="tt-custom-mobile-indent container">
         <div class="tt-categories-title">
-            <div class="tt-title">Categories</div>
+            <div class="tt-title">Tags</div>
             <div>
-                <a href="/categories/create" class="btn btn-secondary btn-width-lg">+Add New Categories</a>
+                <a href="/tags/create" class="btn btn-secondary btn-width-lg">+Add New Tag</a>
             </div>
             <div class="tt-search">
                 <form class="search-wrapper">
                     <div class="search-form">
-                        <input type="text" class="tt-search__input" placeholder="Search Categories">
+                        <input type="text" class="tt-search__input" placeholder="Search Tags">
                         <button class="tt-search__btn" type="submit">
                             <svg class="tt-icon">
                                 <use xlink:href="#icon-search"></use>
@@ -28,20 +28,19 @@
         </div>
         <div class="tt-categories-list">
             <div class="row">
-                @foreach($categories as $category)
+
+                @foreach($tags as $tag)
                 <div class="col-md-6 col-lg-4">
                     <div class="tt-item">
                         <div class="tt-item-header">
                             <ul class="tt-list-badge">
-                                <li><a href="/threads/category/{{$category->id}}"><span
-                                            class="tt-color01 tt-badge">{{$category->category_name}}</span></a></li>
+                                <li><a href="/threads/tag/{{$tag->id}}"><span class="tt-color01 tt-badge">{{$tag->name}}</span></a></li>
                             </ul>
-                            <h6 class="tt-title"><a href="/threads/category/{{$category->id}}">Threads :
-                                    {{$category->threads()->count()}}</a></h6>
+                            <h6 class="tt-title"><a href="/threads/tag/{{$tag->id}}">Threads : {{$tag->threads()->count()}}</a></h6>
                         </div>
                         <div class="tt-item-layout">
                             <div class="innerwrapper">
-                                Lets discuss about whats happening around the world {{$category->category_name}}.
+                                Lets discuss about whats happening around the world {{$tag->name}}.
                             </div>
                             <!-- <div class="innerwrapper">
                                 <h6 class="tt-title">Similar TAGS</h6>
@@ -64,10 +63,6 @@
                     </div>
                 </div>
                 @endforeach
-
-
-
-
             </div>
         </div>
     </div>

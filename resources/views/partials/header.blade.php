@@ -19,7 +19,13 @@
                     <nav>
                         <ul>
                             <li><a href="/"><span>Trending</span></a></li>
-                            <li><a href="/categories"><span>Categories</span></a></li>
+                            <li>
+                                <a href="/categories"><span>Categories</span></a>
+                                <ul>
+                                    <li><a href="/categories">Categories</a></li>
+                                    <li><a href="/tags">Tags</a></li>
+                                </ul>
+                            </li>
                             <li><a href="/threads"><span>My thread</span></a></li>
                             <li>
                                 <a href="page-single-user.html"><span>Pages</span></a>

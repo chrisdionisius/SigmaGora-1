@@ -28,7 +28,7 @@
                         </h3>
                         <div class="tt-item-tag">
                             <ul class="tt-list-badge">
-                                <li><a href="#"><span
+                                <li><a href="/threads/category/{{$thread->category->id}}"><span
                                             class="tt-color03 tt-badge">{{$thread->category->category_name}}</span></a>
                                 </li>
                             </ul>

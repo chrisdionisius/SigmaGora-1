@@ -19,11 +19,14 @@ Route::get('/index', 'ThreadController@index')->name('index');
 Route::get('/test', 'ThreadController@test');
 
 Route::get('/threads/category/{category}','ThreadController@showByCategory');
+
 Route::get('/threads/tag/{tag}', 'ThreadController@showByTag');
 
 Route::resource('threads','ThreadController');
 
 Route::resource('categories','CategoryController');
+
+Route::resource('tags','TagController');
 
 Route::post('like', 'LikesController@like');
 Route::delete('like', 'LikesController@dislike');
