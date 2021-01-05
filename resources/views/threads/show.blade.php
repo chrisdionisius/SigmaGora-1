@@ -22,6 +22,8 @@
                                         <use xlink:href="#icon-time"></use>
                                     </svg></i>{{$thread-> elapsed}}
                             </a>
+                            
+                            
                         </div>
                         <h3 class="tt-item-title">
                             <a href="#">{{$thread->title}}</a>
@@ -271,6 +273,7 @@
                                         <use xlink:href="#icon-time"></use>
                                     </svg></i>{{$comment->elapsed}}
                             </a>
+                            
                         </div>
                     </div>
                     <div class="tt-item-description">

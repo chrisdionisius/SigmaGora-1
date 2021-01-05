@@ -22,6 +22,12 @@ Route::get('/threads/category/{category}','ThreadController@showByCategory');
 
 Route::get('/threads/tag/{tag}', 'ThreadController@showByTag');
 
+Route::get('/search','ThreadController@search');
+
+Route::get('/categories/search','CategoryController@search');
+
+Route::get('/tags/search','CategoryController@search');
+
 Route::resource('threads','ThreadController');
 
 Route::resource('categories','CategoryController');

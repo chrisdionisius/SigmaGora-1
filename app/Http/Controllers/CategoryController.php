@@ -84,4 +84,9 @@ class CategoryController extends Controller
     {
         //
     }
+
+    public function search(Request $request){
+        $categories = Category::where('category_name','like',"%".$request->search."%")->paginate(5);
+        return view('threads.categories',compact('categories'));
+    }
 }

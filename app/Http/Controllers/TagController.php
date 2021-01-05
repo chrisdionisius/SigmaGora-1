@@ -35,7 +35,9 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        Tag::create($request->all());
+        $data=$request;
+        $data=$request->merge(['slug'=>\Str::slug($request->name)]);
+        Tag::create($data->all());
         return redirect('/tags');
     }
 
@@ -82,5 +84,10 @@ class TagController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function search(Request $request){
+        $tags = Tag::where('name','like',"%".$request->search."%")->paginate(5);
+        return view('threads.tags',compact('tags'));
     }
 }

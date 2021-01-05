@@ -19,7 +19,7 @@ class ThreadController extends Controller
     public function index()
     {
         $threads = Thread::withCount('likes')->where('user_id',Auth::user()->id)->orderBy('likes_count','desc')->paginate(5);
-        return view('threads.test',compact('threads'));
+        return view('threads.thread',compact('threads'));
     }
     /**
      * Show the form for creating a new resource.
@@ -129,6 +129,10 @@ class ThreadController extends Controller
         return view('threads.index',compact('threads'));
     } 
 
+    public function search(Request $request){
+        $threads = Thread::where('title','like',"%".$request->search."%")->paginate(5);
+        return view('threads.index',compact('threads'));
+    }
     public function test()
     {
         return view('threads.test');

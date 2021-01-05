@@ -66,9 +66,9 @@
                         </svg>
                     </button>
                     <!-- /toggle -->
-                    <form class="search-wrapper">
+                    <form class="search-wrapper" action="/search" method="get">
                         <div class="search-form">
-                            <input type="text" class="tt-search__input" placeholder="Search">
+                            <input type="text" class="tt-search__input" placeholder="Search" name="search">
                             <button class="tt-search__btn" type="submit">
                                 <svg class="tt-icon">
                                     <use xlink:href="#icon-search"></use>
