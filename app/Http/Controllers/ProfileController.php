@@ -2,26 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\User;
 
-class CategoryController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth', ['only' => ['create','store']]);
-    }
-    
     public function index()
     {
-        $categories=Category::all();
-        return view('threads.categories',compact('categories'));
+        //
     }
 
     /**
@@ -31,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('categories.form');
+        //
     }
 
     /**
@@ -42,17 +37,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        Category::create($request->all());
-        return redirect('/categories');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($id)
     {
         //
     }
@@ -60,10 +54,10 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
         //
     }
@@ -72,27 +66,30 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request)
     {
-        //
+        $user = User::find(Auth::user()->id);
+        if ($request->password) {
+            $user->password=Hash::make($request->password);
+        }
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->save();
+        
+        return back();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Category  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
         //
-    }
-
-    public function search(Request $request){
-        $categories = Category::where('category_name','like',"%".$request->search."%")->paginate(5);
-        return view('threads.categories',compact('categories'));
     }
 }

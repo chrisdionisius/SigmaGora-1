@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Thread;
 
 class HomeController extends Controller
 {
@@ -13,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -24,5 +25,10 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function dashboard(){
+        $threads = Thread::withCount('likes','views','comments')->orderBy('likes_count','desc')->orderBy('views_count', 'desc')->orderBy('comments_count', 'desc')->paginate(5);
+        return view('threads.index',compact('threads'));
     }
 }

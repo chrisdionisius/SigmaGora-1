@@ -4,27 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Thread;
 use App\Models\Category;
-use App\User;
-use App\Like;
 use App\Tag;
+use App\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ThreadController extends Controller
 {    
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index']]);
+        $this->middleware('auth', ['except' => ['show']]);
     }
     public function index()
     {
-        $like=Like::where('likeable_type','App\Models\Thread');
-        $threads = Thread::paginate(5);
-        $users = User::all();
-        $categories = Category::all();
-        return view('threads.index',compact('threads','users','categories','like'));
+        $threads = Thread::withCount('likes')->where('user_id',Auth::user()->id)->orderBy('likes_count','desc')->paginate(5);
+        return view('threads.thread',compact('threads'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -70,13 +66,10 @@ class ThreadController extends Controller
      */
     public function show(Thread $thread)
     {
-        Thread::findOrFail($thread->id);
-        $users=User::all();
-        $like=Like::where('likeable_type','App\Models\Thread')->where('likeable_id',$thread->id)->count();
-        $categories = Category::all();
-        return view('threads.show',compact('thread','users','categories','like'));
+        $expiresAt = now()->addHours(3);
+        views($thread)->cooldown($expiresAt)->record();
+        return view('threads.show',compact('thread'));
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -85,9 +78,13 @@ class ThreadController extends Controller
      */
     public function edit(Thread $thread)
     {
-        $categories = Category::all();
-        $tags=Tag::all();
-        return view('threads.edit',compact('thread','categories','tags'));
+        if ($thread->user_id !== auth()->id()){
+            return redirect('/');
+        }else{
+            $categories = Category::all();
+            $tags=Tag::all();
+            return view('threads.edit',compact('thread','categories','tags'));
+        }
     }
 
     /**
@@ -107,6 +104,7 @@ class ThreadController extends Controller
             $data=$request->merge(['media'=>$path]);
         }
         $thread->update($request->all());
+        $thread->tags()->sync($request->tags);
         return redirect('/threads');
     }
 
@@ -120,5 +118,23 @@ class ThreadController extends Controller
     {
         $thread->delete();
         return redirect('/threads');
+    }
+    public function showByCategory(Category $category){
+        $threads=$category->threads();
+        return view('threads.index',compact('threads'));
+    }
+
+    public function showByTag(Tag $tag){
+        $threads=$tag->threads();
+        return view('threads.index',compact('threads'));
+    } 
+
+    public function search(Request $request){
+        $threads = Thread::where('title','like',"%".$request->search."%")->paginate(5);
+        return view('threads.index',compact('threads'));
+    }
+    public function test()
+    {
+        return view('threads.test');
     }
 }

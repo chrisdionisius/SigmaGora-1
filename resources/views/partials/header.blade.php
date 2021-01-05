@@ -11,22 +11,28 @@
                 <!-- /toggle mobile menu -->
                 <!-- logo -->
                 <div class="tt-logo">
-                    <a href="index.html"><img src="images/logo.png" alt=""></a>
+                    <a href="/"><img src="{{asset('theme/images/sigma.jpg')}}" alt=""></a>
                 </div>
                 <!-- /logo -->
                 <!-- desctop menu -->
                 <div class="tt-desktop-menu">
                     <nav>
                         <ul>
-                            <li><a href="page-categories.html"><span>Categories</span></a></li>
-                            <li><a href="page-tabs.html"><span>Trending</span></a></li>
-                            <li><a href="page-create-topic.html"><span>New</span></a></li>
+                            <li><a href="/"><span>Trending</span></a></li>
+                            <li>
+                                <a href="/categories"><span>Categories</span></a>
+                                <ul>
+                                    <li><a href="/categories">Categories</a></li>
+                                    <li><a href="/tags">Tags</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/threads"><span>My thread</span></a></li>
                             <li>
                                 <a href="page-single-user.html"><span>Pages</span></a>
                                 <ul>
                                     <li><a href="index.html">Home</a></li>
                                     <li><a href="page-single-topic.html">Single Topic</a></li>
-                                    <li><a href="page-create-topic.html">Create Topic</a></li>
+                                    <li><a href="/threads/create">Create Topic</a></li>
                                     <li><a href="page-single-user.html">Single User Activity</a></li>
                                     <li><a href="page-single_threads.html">Single User Threads</a></li>
                                     <li><a href="page-single_replies.html">Single User Replies</a></li>
@@ -60,9 +66,9 @@
                         </svg>
                     </button>
                     <!-- /toggle -->
-                    <form class="search-wrapper">
+                    <form class="search-wrapper" action="/search" method="get">
                         <div class="search-form">
-                            <input type="text" class="tt-search__input" placeholder="Search">
+                            <input type="text" class="tt-search__input" placeholder="Search" name="search">
                             <button class="tt-search__btn" type="submit">
                                 <svg class="tt-icon">
                                     <use xlink:href="#icon-search"></use>
@@ -74,7 +80,7 @@
                                 </svg>
                             </button>
                         </div>
-                        <div class="search-results">
+                        <!-- <div class="search-results">
                             <div class="tt-search-scroll">
                                 <ul>
                                     <li>
@@ -129,29 +135,42 @@
                             </div>
                             <button type="button" class="tt-view-all" data-toggle="modal"
                                 data-target="#modalAdvancedSearch">Advanced Search</button>
-                        </div>
+                        </div> -->
                     </form>
                 </div>
                 <!-- /tt-search -->
             </div>
             <div class="col-auto ml-auto">
                 <div class="tt-user-info d-flex justify-content-center">
-                    <a href="#" class="tt-btn-icon">
-                        <i class="tt-icon"><svg>
-                                <use xlink:href="#icon-notification"></use>
-                            </svg></i>
-                    </a>
-                    <div class="tt-avatar-icon tt-size-md">
-                        <i class="tt-icon"><svg>
-                                <use xlink:href="#icon-ava-a"></use>
-                            </svg></i>
-                    </div>
-                    <div class="custom-select-01">
-                        <select>
-                            <option value="Default Sorting">azyrusmax</option>
-                            <option value="value 01">value 01</option>
-                            <option value="value 02">value 02</option>
-                        </select>
+                    <div class="tt-desktop-menu">
+                        <nav>
+                            <ul>
+                                <li>
+                                    @guest
+                                    <span>Login</span>
+                                    <ul>
+                                        <li><a href="/login">Login</a></li>
+                                        <li><a href="/register">Register</a></li>
+                                    </ul>
+                                    @else
+                                    <span>{{ Auth::user()->name }}</span>
+                                    <ul>
+                                        <li><a href="#icon-settings_fill" id="js-settings-btn" >Edit Profi</a></li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">{{ __('Logout') }}
+                                            </a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                style="display: none;">
+                                                @csrf
+                                            </form>
+                                        </li>
+                                    </ul>
+                                    @endguest
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
