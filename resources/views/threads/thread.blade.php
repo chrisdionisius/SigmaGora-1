@@ -28,8 +28,8 @@
                                 <use xlink:href="#icon-settings_fill"></use>
                             </svg>
                         </a>
-                        <a href="#" class="btn btn-primary">Message</a>
-                        <a href="#" class="btn btn-secondary">Follow</a>
+                        <!-- <a href="#" class="btn btn-primary">Message</a>
+                        <a href="#" class="btn btn-secondary">Follow</a> -->
                     </div>
                 </div>
             </div>
@@ -595,7 +595,7 @@
                             <div class="tt-col-value">Diposting</div>
                             <div class="tt-col-value">Aksi</div>
                         </div>
-                        @foreach($threads as $thread)
+                        @forelse($threads as $thread)
                         <div class="tt-item">
                             <div class="tt-col-avatar">
                                 <svg class="tt-icon">
@@ -640,7 +640,11 @@
                                 <a href="/threads/{{$thread->id}}/edit" class="btn btn-secondary">Edit</a>
                             </div>
                         </div>
-                        @endforeach
+                        @empty
+                        <div class="tt-list-header">
+                            <div class="tt-col-topic-center">No thread has been written yet</div>
+                        </div>
+                        @endforelse
                         <div class="tt-row-btn">
                             <ul class="pagination justify-content-center mb-4">
                                 {{$threads->links()}}

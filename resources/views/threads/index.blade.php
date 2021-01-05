@@ -15,7 +15,7 @@
             <!-- <div class="tt-topic-alert tt-alert-default" role="alert">
                 <a href="#" target="_blank">4 new posts</a> are added recently, click here to load them.
             </div> -->
-            @foreach($threads as $thread)
+            @forelse($threads as $thread)
             <div class="tt-item">
                 <div class="tt-col-avatar">
                     <svg class="tt-icon">
@@ -57,7 +57,11 @@
                 <div class="tt-col-value hide-mobile">{{views($thread)->count()}}</div>
                 <div class="tt-col-value hide-mobile">{{$thread-> elapsed}} <br>{{$thread->user->name}}</div>
             </div>
-            @endforeach
+            @empty
+            <div class="tt-list-header">
+                            <div class="tt-col-topic-center"></div>
+                        </div>
+            @endforelse
             <div class="tt-row-btn">
                 <ul class="pagination justify-content-center mb-4">
                     {{$threads->links()}}

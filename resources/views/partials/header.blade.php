@@ -80,7 +80,7 @@
                                 </svg>
                             </button>
                         </div>
-                        <div class="search-results">
+                        <!-- <div class="search-results">
                             <div class="tt-search-scroll">
                                 <ul>
                                     <li>
@@ -135,7 +135,7 @@
                             </div>
                             <button type="button" class="tt-view-all" data-toggle="modal"
                                 data-target="#modalAdvancedSearch">Advanced Search</button>
-                        </div>
+                        </div> -->
                     </form>
                 </div>
                 <!-- /tt-search -->
