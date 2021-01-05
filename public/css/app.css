@@ -4402,7 +4402,7 @@ input[type=button].btn-block {
   }
 }
 
-.nav {
+.nav { 
   display: flex;
   flex-wrap: wrap;
   padding-left: 0;

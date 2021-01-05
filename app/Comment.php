@@ -18,6 +18,11 @@ class Comment extends Model implements Likeable
     {
         return $this->belongsTo('App\User');
     }
+
+    public function thread()
+    {
+        return $this->belongsTo('App\Models\Thread');
+    }
     
     public function getElapsedAttribute(){
         if (Carbon::now()->diffInSeconds($this->updated_at) < 60) {

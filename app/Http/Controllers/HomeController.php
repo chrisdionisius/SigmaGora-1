@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -28,7 +28,7 @@ class HomeController extends Controller
     }
 
     public function dashboard(){
-        $threads = Thread::withCount('likes')->orderBy('likes_count','asc')->paginate(5);
+        $threads = Thread::withCount('likes','views','comments')->orderBy('likes_count','desc')->orderBy('views_count', 'desc')->orderBy('comments_count', 'desc')->paginate(5);
         return view('threads.index',compact('threads'));
     }
 }

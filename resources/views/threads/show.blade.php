@@ -45,6 +45,20 @@
                         </p>
                     </div>
                     <div class="tt-item-info info-bottom">
+                        @guest
+                        <a href="/login">
+                            <button href="/login" class="btn btn-primary">
+                                <a href="/login" class="tt-icon-btn">
+                                    <i class="tt-icon">
+                                        <svg>
+                                            <use xlink:href="#icon-like"></use>
+                                        </svg>
+                                    </i>
+                                    <span class="tt-text">{{$thread->likes->count()}} </span>
+                                </a>
+                            </button>
+                        </a>
+                        @else
                         @if(!auth()->user()->hasLiked($thread))
                         <form action="/like" method="post">
                             @csrf
@@ -79,6 +93,8 @@
                             </button>
                         </form>
                         @endif
+
+                        @endguest
 
                         <!-- <a href="#" class="tt-icon-btn">
                                 <i class="tt-icon"><svg>
@@ -262,6 +278,20 @@
                     </div>
                     <div class="tt-item-info info-bottom">
                         <div class="tt-item-info info-bottom">
+                            @guest
+                            <a href="/login">
+                                <button class="btn btn-primary">
+                                    <a href="login" class="tt-icon-btn">
+                                        <i class="tt-icon">
+                                            <svg>
+                                                <use xlink:href="#icon-like"></use>
+                                            </svg>
+                                        </i>
+                                        <span class="tt-text">{{$comment->likes->count()}}</span>
+                                    </a>
+                                </button>
+                            </a>
+                            @else
                             @if(!auth()->user()->hasLiked($comment))
                             <form action="/like" method="post">
                                 @csrf
@@ -274,8 +304,7 @@
                                                 <use xlink:href="#icon-like"></use>
                                             </svg>
                                         </i>
-                                        <span
-                                            class="tt-text">{{$comment->likes->count()}}</span>
+                                        <span class="tt-text">{{$comment->likes->count()}}</span>
                                     </a>
                                 </button>
                             </form>
@@ -292,12 +321,12 @@
                                                 <use xlink:href="#icon-like"></use>
                                             </svg>
                                         </i>
-                                        <span
-                                            class="tt-text biru">{{$comment->likes->count()}}</span>
+                                        <span class="tt-text biru">{{$comment->likes->count()}}</span>
                                     </a>
                                 </button>
                             </form>
                             @endif
+                            @endguest
                             <!-- <a href="#" class="tt-icon-btn">
                                 <i class="tt-icon"><svg>
                                         <use xlink:href="#icon-dislike"></use>
@@ -344,7 +373,6 @@
                                 placeholder="Lets get started"></textarea>
                         </div>
                         <div class="pt-row">
-
                             <div class="col-auto">
                                 <!-- <div class="checkbox-group">
                                     <input type="checkbox" id="checkBox21" name="checkbox" checked="">
@@ -357,7 +385,13 @@
                             </div>
 
                             <div class="col-auto">
+                                @guest
+                                <a href="/login">
+                                <button class="btn btn-secondary btn-width-lg">Reply</button>
+                                </a>
+                                @else
                                 <button type="submit" class="btn btn-secondary btn-width-lg">Reply</button>
+                                @endguest
                             </div>
 
                         </div>

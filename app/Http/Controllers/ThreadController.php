@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Thread;
 use App\Models\Category;
 use App\Tag;
+use App\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -13,19 +14,13 @@ class ThreadController extends Controller
 {    
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index']]);
+        $this->middleware('auth', ['except' => ['show']]);
     }
     public function index()
     {
         $threads = Thread::withCount('likes')->where('user_id',Auth::user()->id)->orderBy('likes_count','desc')->paginate(5);
-        return view('threads.thread',compact('threads'));
+        return view('threads.test',compact('threads'));
     }
-
-    public function sortBy($col){
-        $threads = Thread::withCount($col)->orderBy($col.'_count','desc')->paginate(5);
-        return view('threads.thread',compact('threads'));
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -124,7 +119,14 @@ class ThreadController extends Controller
         $thread->delete();
         return redirect('/threads');
     }
-    
+    public function showByCategory(Category $category){
+        $threads = Thread::where('category_id',$category->id)->withCount('likes','views','comments')->orderBy('likes_count','desc')->orderBy('views_count', 'desc')->orderBy('comments_count', 'desc')->paginate(5);
+        return view('threads.index',compact('threads'));
+    }   
+    public function showByTags(Tag $tag){
+        $threads = Thread::where($thread->tags,$tag)->withCount('likes','views','comments')->orderBy('likes_count','desc')->orderBy('views_count', 'desc')->orderBy('comments_count', 'desc')->paginate(5);
+        return view('threads.index',compact('threads'));
+    }    
     public function test()
     {
         return view('threads.test');
