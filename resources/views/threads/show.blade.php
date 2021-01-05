@@ -11,7 +11,7 @@
                         <div class="tt-item-info info-top">
                             <div class="tt-avatar-icon">
                                 <i class="tt-icon"><svg>
-                                        <use xlink:href="#icon-ava-d"></use>
+                                        <use xlink:href="#icon-ava-{{strtolower(substr($thread->user->name,0,1))}}"></use>
                                     </svg></i>
                             </div>
                             <div class="tt-avatar-title">
@@ -121,7 +121,7 @@
                                     <use xlink:href="#icon-flag"></use>
                                 </svg></i>
                         </a>
-                        <a href="#" class="tt-icon-btn tt-hover-02 tt-small-indent">
+                        <a href="#reply" class="tt-icon-btn tt-hover-02 tt-small-indent">
                             <i class="tt-icon"><svg>
                                     <use xlink:href="#icon-reply"></use>
                                 </svg></i>
@@ -157,7 +157,7 @@
                                 <span class="tt-text">{{$thread->likes->count()}}</span>
                             </a>
                         </div>
-                        <div class="tt-item">
+                        <!-- <div class="tt-item">
                             <a href="#" class="tt-icon-btn tt-position-bottom">
                                 <i class="tt-icon"><svg>
                                         <use xlink:href="#icon-user"></use>
@@ -180,7 +180,7 @@
                                     </svg></i>
                                 <span class="tt-text">32</span>
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- <hr>
                     <h6 class="tt-title">Frequent Posters</h6>
@@ -236,7 +236,7 @@
                         </div>
                     </div> -->
                     <hr>
-                    <div class="row-object-inline form-default">
+                    <!-- <div class="row-object-inline form-default">
                         <h6 class="tt-title">Sort replies by:</h6>
                         <ul class="tt-list-badge tt-size-lg">
                             <li><a href="#"><span class="tt-badge">Recent</span></a></li>
@@ -252,7 +252,7 @@
                             <option value="Shortest">Shortest</option>
                             <option value="Accepted Answer">Accepted Answer</option>
                         </select>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             @foreach($thread->comments as $comment)
@@ -262,7 +262,7 @@
                         <div class="tt-item-info info-top">
                             <div class="tt-avatar-icon">
                                 <i class="tt-icon"><svg>
-                                        <use xlink:href="#icon-ava-t"></use>
+                                        <use xlink:href="#icon-ava-{{strtolower(substr($comment->user->name,0,1))}}"></use>
                                     </svg></i>
                             </div>
                             <div class="tt-avatar-title">
@@ -366,7 +366,7 @@
             <div class="tt-wrapper-inner">
                 <h4 class="tt-title-separator"><span>You’ve reached the end of replies</span></h4>
             </div>
-            <div class="tt-wrapper-inner">
+            <div class="tt-wrapper-inner" id="reply">
                 <div class="pt-editor form-default">
                     <h6 class="pt-title">Post Your Reply</h6>
                     <form name="FrmComment" action="{{route('addComment',$thread->id)}}" method="post">

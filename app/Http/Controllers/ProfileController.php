@@ -1,26 +1,22 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Tag;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\User;
 
-class TagController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth', ['only' => ['create','store']]);
-    }
-
     public function index()
     {
-        $tags=Tag::all();
-        return view('threads.tags',compact('tags'));
+        //
     }
 
     /**
@@ -30,7 +26,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('tags.form');
+        //
     }
 
     /**
@@ -41,10 +37,7 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        $data=$request;
-        $data=$request->merge(['slug'=>\Str::slug($request->name)]);
-        Tag::create($data->all());
-        return redirect('/tags');
+        //
     }
 
     /**
@@ -76,9 +69,17 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $user = User::find(Auth::user()->id);
+        if ($request->password) {
+            $user->password=Hash::make($request->password);
+        }
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->save();
+        
+        return back();
     }
 
     /**
@@ -90,10 +91,5 @@ class TagController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function search(Request $request){
-        $tags = Tag::where('name','like',"%".$request->search."%")->paginate(5);
-        return view('threads.tags',compact('tags'));
     }
 }

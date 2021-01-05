@@ -155,7 +155,7 @@
                                     @else
                                     <span>{{ Auth::user()->name }}</span>
                                     <ul>
-                                        <li><a href="/profil/edit">Edit Profi</a></li>
+                                        <li><a href="#icon-settings_fill" id="js-settings-btn" >Edit Profi</a></li>
                                         <li>
                                             <a class="dropdown-item" href="{{ route('logout') }}"
                                                 onclick="event.preventDefault();
